@@ -5,7 +5,7 @@ server:
 spring:
   datasource:
     username: postgres
-    password: clear2546
+    password: topsecret
     url: jdbc:postgresql://localhost:5432/holdthese
   servlet:
     multipart:
