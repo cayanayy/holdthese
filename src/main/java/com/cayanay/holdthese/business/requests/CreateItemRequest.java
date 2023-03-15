@@ -1,10 +1,11 @@
 package com.cayanay.holdthese.business.requests;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -17,11 +18,10 @@ public class CreateItemRequest {
     @Size(min = 1, max = 32)
     private String code;
 
-    @Null
+    @Nullable
     private List<MultipartFile> files;
 
     @NotNull
-    @NotBlank
     @Size(min = 1)
     private String message;
 

@@ -19,3 +19,5 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
+
+FOLDER_DIRECTORY: C:\Users\cayan\Desktop\

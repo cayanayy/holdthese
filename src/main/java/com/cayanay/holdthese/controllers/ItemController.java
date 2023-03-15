@@ -36,7 +36,6 @@ public class ItemController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public void createItem(@Valid @ModelAttribute CreateItemRequest createItemRequest) throws IOException {
-        System.out.println(createItemRequest.toString());
         AccessCode accessCode = accessCodeManager.getAccessCodeByCode(new GetAccessCodeRequest(createItemRequest.getCode())); // test for expiration
         List<File> files = new ArrayList<>();
         if (createItemRequest.getFiles() != null) {

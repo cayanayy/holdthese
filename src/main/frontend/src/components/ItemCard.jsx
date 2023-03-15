@@ -15,7 +15,7 @@ const ItemCard = ({item}) => {
         item.files.forEach((file, i) => {
             axios
                 .get(
-                    `${process.env.REACT_APP_API_URL}/file?accessCode=${file.fileAccessCode}`
+                    `${process.env.REACT_APP_API_URL}/file?filecode=${file.fileAccessCode}`
                 )
                 .then(async (res) => {
                     const base64Response = await fetch(
