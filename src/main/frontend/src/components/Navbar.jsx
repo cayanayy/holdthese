@@ -16,7 +16,6 @@ const Navbar = () => {
         navigate(`/items?code=${code}`);
       })
       .catch((error) => {
-        console.log(error.response.data.message)
         toast.error(error.response.data.message, {
           position: "top-center",
           autoClose: 5000,

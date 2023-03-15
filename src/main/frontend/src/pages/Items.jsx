@@ -6,19 +6,19 @@ import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const ItemsPage = () => {
+  const [searchParams] = useSearchParams();
+  const code = searchParams.get("code");
   const [items, setItems] = useState([]),
     [files, setFiles] = useState([]),
-    [searchParams] = useSearchParams(),
-    code = searchParams.get("code"),
     messageRef = useRef(null),
     durationRef = useRef(null),
-    [fileSelectedNum, setFileSelectedNum] = useState(0);
+    [numberOfSelectedFile, setNumberOfSelectedFile] = useState(0);
   //
 
   const handleFileChange = (e) => {
     const files = [...e.target.files];
     setFiles(files);
-    setFileSelectedNum(files.length);
+    setNumberOfSelectedFile(files.length);
   };
 
   const createNewItem = (event, message, duration, files) => {
@@ -32,7 +32,7 @@ const ItemsPage = () => {
     });
     axios
       .post(`${process.env.REACT_APP_API_URL}/item`, formData, {
-        headers: {
+        "headers": {
           "Content-type": "multipart/form-data",
         },
       })
@@ -40,7 +40,6 @@ const ItemsPage = () => {
         getItems(code);
       })
       .catch((error) => {
-        console.log(error);
         toast.error(error.response.data.message, {
           position: "top-center",
           autoClose: 5000,
@@ -119,8 +118,8 @@ const ItemsPage = () => {
                   htmlFor="file"
                   className="p-4 items-center text-primary font-black text-base cursor-pointer"
                 >
-                  {fileSelectedNum > 0
-                    ? `${fileSelectedNum} file selected`
+                  {numberOfSelectedFile > 0
+                    ? `${numberOfSelectedFile} file selected`
                     : "add files"}
                 </label>
                 <input
