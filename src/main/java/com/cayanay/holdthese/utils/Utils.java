@@ -5,7 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Utils {
-    public static String createMD5(String input) {
+    public static String hash(String input) {
         try {
             MessageDigest msgDst = MessageDigest.getInstance("MD5");
             byte[] msgArr = msgDst.digest(input.getBytes());

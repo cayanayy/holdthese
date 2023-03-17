@@ -41,7 +41,7 @@ public class ItemController {
         if (createItemRequest.getFiles() != null) {
             for (MultipartFile multipartFile :
                     createItemRequest.getFiles()) {
-                String fileAccessCode = Utils.createMD5(multipartFile.getOriginalFilename() + multipartFile.getContentType() + LocalDateTime.now());
+                String fileAccessCode = Utils.hash(multipartFile.getOriginalFilename() + multipartFile.getContentType() + LocalDateTime.now());
                 File file = File.builder().name(multipartFile.getOriginalFilename()).createdAt(LocalDateTime.now()).type(multipartFile.getContentType()).fileAccessCode(fileAccessCode).build();
                 storageManager.uploadFile(multipartFile, fileAccessCode);
                 fileManager.createFile(file);

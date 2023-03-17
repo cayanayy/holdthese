@@ -12,7 +12,7 @@ const ItemCard = ({item}) => {
                 ? `${hour} hours, ${minutes} minutes left`
                 : `${minutes} minutes left`;
     const downloadFiles = () => {
-        item.files.forEach((file, i) => {
+        item.files.forEach((file) => {
             axios
                 .get(
                     `${process.env.REACT_APP_API_URL}/file?filecode=${file.fileAccessCode}`
