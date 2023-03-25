@@ -11,8 +11,8 @@ root.render(
     <React.StrictMode>
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Home/>}/>
-                <Route path="/items" element={<ItemsPage/>}/>
+                <Route path="home" element={<Home/>}/>
+                <Route path=":code" element={<ItemsPage/>}/>
             </Routes>
         </BrowserRouter>
     </React.StrictMode>

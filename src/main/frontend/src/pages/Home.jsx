@@ -10,18 +10,17 @@ const Home = () => {
         codeRef = useRef(null),
         durationRef = useRef(null),
         openForm = () => setIsOpen(true);
-
     //
 
     function createNewAccessCode(event, code, duration) {
         event.preventDefault();
         axios
-            .post(`${process.env.REACT_APP_API_URL}/access`, {
+            .post(`${process.env.REACT_APP_API_URL}`, {
                 code: code,
                 duration: duration,
             })
             .then((res) => {
-                navigate(`/items?code=${code}`);
+                navigate(`/${code}`);
             })
             .catch((error) => {
                 toast.error(error.response.data.message, {

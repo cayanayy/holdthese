@@ -32,7 +32,6 @@ public class ItemManager implements ItemService {
 
     public List<Item> getItemsByCode(String code) {
         AccessCode accessCode = accessCodeManager.getAccessCodeByCode(code);
-        itemBusinessRules.checkIfItemsExits(accessCode);
         List<Item> items = itemRepository.findItemsByAccessCode(accessCode);
         items.removeIf(item -> item.getUnableAt().isBefore(LocalDateTime.now()));
 

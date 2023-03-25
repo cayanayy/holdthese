@@ -14,10 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateItemRequest {
-    @NotNull
-    @Size(min = 1, max = 32)
-    private String code;
-
     @Nullable
     private List<MultipartFile> files;
 

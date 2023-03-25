@@ -10,10 +10,4 @@ import org.springframework.stereotype.Service;
 @Service
 public class ItemBusinessRules {
     private ItemRepository itemRepository;
-
-    public void checkIfItemsExits(AccessCode accessCode) {
-        if (itemRepository.findItemsByAccessCode(accessCode).isEmpty()) {
-            throw new BusinessException("There is no item connected to this access code!");
-        }
-    }
 }
