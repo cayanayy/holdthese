@@ -1,12 +1,14 @@
 package com.cayanay.holdthese;
 
 import com.cayanay.holdthese.core.utilities.exceptions.BusinessException;
+import com.cayanay.holdthese.core.utilities.exceptions.NotFoundException;
 import com.cayanay.holdthese.core.utilities.exceptions.ProblemDetails;
 import com.cayanay.holdthese.core.utilities.exceptions.ValidationProblemDetails;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -18,6 +20,7 @@ import java.util.HashMap;
 
 @SpringBootApplication
 @RestControllerAdvice
+@EnableJpaAuditing
 public class HoldtheseApplication {
 
     public static void main(String[] args) {
@@ -30,7 +33,14 @@ public class HoldtheseApplication {
         ProblemDetails problemDetails = new ProblemDetails();
         problemDetails.setMessage(businessException.getMessage());
         return problemDetails;
+    }
 
+    @ExceptionHandler
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    public ProblemDetails handleNotFoundException(NotFoundException notFoundException) {
+        ProblemDetails problemDetails = new ProblemDetails();
+        problemDetails.setMessage(notFoundException.getMessage());
+        return problemDetails;
     }
 
     @ExceptionHandler

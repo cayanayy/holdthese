@@ -1,6 +1,7 @@
 package com.cayanay.holdthese.business.rules;
 
 import com.cayanay.holdthese.core.utilities.exceptions.BusinessException;
+import com.cayanay.holdthese.core.utilities.exceptions.NotFoundException;
 import com.cayanay.holdthese.dataaccess.AccessCodeRepository;
 import com.cayanay.holdthese.entities.AccessCode;
 import lombok.AllArgsConstructor;
@@ -21,10 +22,9 @@ public class AccessCodeBusinessRules {
 
     public void checkIfAccessCodeDoesNotExists(String code) {
         if (!accessCodeRepository.existsByCode(code)) {
-            throw new BusinessException("Access code does not exists!");
+            throw new NotFoundException("Access code does not exists!");
         }
     }
-
 
     public void checkIfExpired(String code) {
         AccessCode accessCode = accessCodeRepository.findAccessCodeByCode(code);

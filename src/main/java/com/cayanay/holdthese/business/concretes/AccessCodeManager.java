@@ -2,7 +2,6 @@ package com.cayanay.holdthese.business.concretes;
 
 import com.cayanay.holdthese.business.abstracts.AccessCodeService;
 import com.cayanay.holdthese.business.requests.CreateAccessCodeRequest;
-import com.cayanay.holdthese.business.requests.GetAccessCodeRequest;
 import com.cayanay.holdthese.business.rules.AccessCodeBusinessRules;
 import com.cayanay.holdthese.core.utilities.mappers.ModelMapperManager;
 import com.cayanay.holdthese.dataaccess.AccessCodeRepository;
@@ -22,18 +21,17 @@ public class AccessCodeManager implements AccessCodeService {
     @Override
     public void createAccessCode(CreateAccessCodeRequest createAccessCodeRequest) {
         accessCodeBusinessRules.checkIfAccessCodeExists(createAccessCodeRequest.getCode());
-        AccessCode accessCode = this.modelMapperManager.forRequest().map(createAccessCodeRequest, AccessCode.class);
-        accessCode.setCreatedAt(LocalDateTime.now());
+        AccessCode accessCode = modelMapperManager.forRequest().map(createAccessCodeRequest, AccessCode.class);
         accessCode.setExpiresAt(LocalDateTime.now().plusMinutes(createAccessCodeRequest.getDuration()));
         accessCodeRepository.save(accessCode);
     }
 
     @Override
-    public AccessCode getAccessCodeByCode(GetAccessCodeRequest getAccessCodeRequest) {
-        String code = getAccessCodeRequest.getCode();
+    public AccessCode getAccessCodeByCode(String code) {
         accessCodeBusinessRules.checkIfAccessCodeDoesNotExists(code);
         accessCodeBusinessRules.checkIfExpired(code);
+        AccessCode accessCode = accessCodeRepository.findAccessCodeByCode(code);
 
-        return accessCodeRepository.findAccessCodeByCode(code);
+        return accessCode;
     }
 }

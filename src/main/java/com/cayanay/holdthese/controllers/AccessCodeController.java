@@ -2,7 +2,6 @@ package com.cayanay.holdthese.controllers;
 
 import com.cayanay.holdthese.business.concretes.AccessCodeManager;
 import com.cayanay.holdthese.business.requests.CreateAccessCodeRequest;
-import com.cayanay.holdthese.business.requests.GetAccessCodeRequest;
 import com.cayanay.holdthese.business.responses.AccessCodeResponse;
 import com.cayanay.holdthese.core.utilities.mappers.ModelMapperManager;
 import jakarta.validation.Valid;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @CrossOrigin("*")
 public class AccessCodeController {
-
     private final AccessCodeManager accessCodeManager;
     private final ModelMapperManager modelMapperManager;
 
@@ -25,9 +23,10 @@ public class AccessCodeController {
         accessCodeManager.createAccessCode(createAccessCodeRequest);
     }
 
-    @GetMapping
-    public AccessCodeResponse getAccessCode(@Valid @RequestParam("code") GetAccessCodeRequest getAccessCodeRequest) {
-        AccessCodeResponse accessCodeResponse = modelMapperManager.forResponses().map(accessCodeManager.getAccessCodeByCode(getAccessCodeRequest), AccessCodeResponse.class);
+    @GetMapping("/{code}")
+    public AccessCodeResponse getAccessCode(@Valid @PathVariable String code) {
+        AccessCodeResponse accessCodeResponse = modelMapperManager.forResponse().map(accessCodeManager.getAccessCodeByCode(code), AccessCodeResponse.class);
+
         return accessCodeResponse;
     }
 }

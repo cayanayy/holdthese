@@ -5,7 +5,6 @@ import com.cayanay.holdthese.business.concretes.FileManager;
 import com.cayanay.holdthese.business.concretes.ItemManager;
 import com.cayanay.holdthese.business.concretes.StorageManager;
 import com.cayanay.holdthese.business.requests.CreateItemRequest;
-import com.cayanay.holdthese.business.requests.GetAccessCodeRequest;
 import com.cayanay.holdthese.business.responses.ItemResponse;
 import com.cayanay.holdthese.core.utilities.mappers.ModelMapperManager;
 import com.cayanay.holdthese.entities.AccessCode;
@@ -36,7 +35,7 @@ public class ItemController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public void createItem(@Valid @ModelAttribute CreateItemRequest createItemRequest) throws IOException {
-        AccessCode accessCode = accessCodeManager.getAccessCodeByCode(new GetAccessCodeRequest(createItemRequest.getCode())); // test for expiration
+        AccessCode accessCode = accessCodeManager.getAccessCodeByCode(createItemRequest.getCode()); // test for expiration
         List<File> files = new ArrayList<>();
         if (createItemRequest.getFiles() != null) {
             for (MultipartFile multipartFile :
@@ -48,15 +47,15 @@ public class ItemController {
                 files.add(file);
             }
         }
-
         itemManager.createItem(createItemRequest, files, accessCode);
     }
 
-    @GetMapping
-    public List<ItemResponse> getItems(@Valid @RequestParam("code") GetAccessCodeRequest getAccessCodeRequest) {
-        List<ItemResponse> itemsResponse = itemManager.getItemsByCode(getAccessCodeRequest).stream().map(item ->
+    @GetMapping("/{accessCode}")
+    public List<ItemResponse> getItems(@Valid @PathVariable String accessCode) {
+        List<ItemResponse> itemsResponse = itemManager.getItemsByCode(accessCode).stream().map(item ->
                 modelMapperManager.forItemResponse().map(item, ItemResponse.class)
         ).toList();
+
         return itemsResponse;
     }
 }

@@ -16,28 +16,30 @@ public class ModelMapperManager implements ModelMapperService {
 
     @Override
     public ModelMapper forRequest() {
-        this.modelMapper.getConfiguration().setAmbiguityIgnored(true).setMatchingStrategy(MatchingStrategies.LOOSE);
-        return this.modelMapper;
+        modelMapper.getConfiguration().setAmbiguityIgnored(true).setMatchingStrategy(MatchingStrategies.LOOSE);
+
+        return modelMapper;
     }
 
     @Override
-    public ModelMapper forResponses() {
-        this.modelMapper.getConfiguration().setAmbiguityIgnored(true).setMatchingStrategy(MatchingStrategies.STANDARD);
-        return this.modelMapper;
+    public ModelMapper forResponse() {
+        modelMapper.getConfiguration().setAmbiguityIgnored(true).setMatchingStrategy(MatchingStrategies.STANDARD);
+
+        return modelMapper;
     }
 
     @Override
     public ModelMapper forItemResponse() {
         ModelMapper customMapper = new ModelMapper();
+
         Converter<Item, ItemResponse> itemResponseConverter = mappingContext -> {
             Item item = mappingContext.getSource();
             ItemResponse itemResponse = mappingContext.getDestination();
-            itemResponse.setFiles(item.getFiles().stream().map(file -> forResponses().map(file, FileResponse.class)).toList());
+            itemResponse.setFiles(item.getFiles().stream().map(file -> forResponse().map(file, FileResponse.class)).toList());
             return itemResponse;
         };
+
         customMapper.addConverter(itemResponseConverter);
         return customMapper;
     }
-
-
 }

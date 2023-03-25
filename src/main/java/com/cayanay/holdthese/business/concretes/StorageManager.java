@@ -1,7 +1,6 @@
 package com.cayanay.holdthese.business.concretes;
 
 import com.cayanay.holdthese.business.abstracts.StorageService;
-import com.cayanay.holdthese.business.requests.DownloadFileRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,9 +20,10 @@ public class StorageManager implements StorageService {
         file.transferTo(new java.io.File(FOLDER_DIRECTORY + accessCode));
     }
 
-    public byte[] downloadFile(DownloadFileRequest downloadFileRequest) throws IOException {
-        String filePath = FOLDER_DIRECTORY + downloadFileRequest.getFilecode();
+    public byte[] downloadFile(String fileCode) throws IOException {
+        String filePath = FOLDER_DIRECTORY.concat(fileCode);
         byte[] fileData = Base64.getEncoder().encode(Files.readAllBytes(new File(filePath).toPath()));
+
         return fileData;
     }
 

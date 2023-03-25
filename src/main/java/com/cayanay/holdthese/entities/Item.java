@@ -3,6 +3,9 @@ package com.cayanay.holdthese.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Table(name = "Items")
+@EntityListeners(AuditingEntityListener.class)
 public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -27,8 +31,11 @@ public class Item {
     @JoinColumn(name = "item_id")
     private List<File> files;
 
-    @Column(nullable = false)
+    @CreatedDate
     private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    private LocalDateTime lastModifiedAt;
 
     @Column(nullable = false)
     private LocalDateTime unableAt;
@@ -36,10 +43,4 @@ public class Item {
     @Column(nullable = false)
     private Long duration;
 
-    public Item(String message, AccessCode accessCode, Long duration, List<File> files) {
-        this.message = message;
-        this.accessCode = accessCode;
-        this.duration = duration;
-        this.files = files;
-    }
 }

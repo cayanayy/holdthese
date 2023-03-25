@@ -20,4 +20,4 @@ spring:
         format_sql: true
     show-sql: true
 
-FOLDER_DIRECTORY: C:\Users\cayan\Desktop\
+FOLDER_DIRECTORY: /home/cayan/Desktop
