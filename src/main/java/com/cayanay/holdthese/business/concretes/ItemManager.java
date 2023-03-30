@@ -2,13 +2,11 @@ package com.cayanay.holdthese.business.concretes;
 
 import com.cayanay.holdthese.business.abstracts.ItemService;
 import com.cayanay.holdthese.business.requests.CreateItemRequest;
-import com.cayanay.holdthese.business.rules.ItemBusinessRules;
 import com.cayanay.holdthese.core.utilities.mappers.ModelMapperManager;
 import com.cayanay.holdthese.dataaccess.ItemRepository;
 import com.cayanay.holdthese.entities.AccessCode;
 import com.cayanay.holdthese.entities.File;
 import com.cayanay.holdthese.entities.Item;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
