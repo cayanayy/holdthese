@@ -1,14 +1,12 @@
 package com.cayanay.holdthese.core.utilities.exceptions;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
 
 import java.util.Map;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class ValidationProblemDetails extends ProblemDetails {
     private Map<String, String> validationErrors;
 }

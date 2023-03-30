@@ -6,13 +6,13 @@ import com.cayanay.holdthese.business.rules.AccessCodeBusinessRules;
 import com.cayanay.holdthese.core.utilities.mappers.ModelMapperManager;
 import com.cayanay.holdthese.dataaccess.AccessCodeRepository;
 import com.cayanay.holdthese.entities.AccessCode;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AccessCodeManager implements AccessCodeService {
     private final AccessCodeRepository accessCodeRepository;
     private final ModelMapperManager modelMapperManager;
@@ -30,8 +30,7 @@ public class AccessCodeManager implements AccessCodeService {
     public AccessCode getAccessCodeByCode(String code) {
         accessCodeBusinessRules.checkIfAccessCodeDoesNotExists(code);
         accessCodeBusinessRules.checkIfExpired(code);
-        AccessCode accessCode = accessCodeRepository.findAccessCodeByCode(code);
 
-        return accessCode;
+        return accessCodeRepository.findAccessCodeByCode(code);
     }
 }

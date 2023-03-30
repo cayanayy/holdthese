@@ -9,18 +9,18 @@ import com.cayanay.holdthese.entities.AccessCode;
 import com.cayanay.holdthese.entities.File;
 import com.cayanay.holdthese.entities.Item;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ItemManager implements ItemService {
     private final ItemRepository itemRepository;
     private final AccessCodeManager accessCodeManager;
     private final ModelMapperManager modelMapperManager;
-    private final ItemBusinessRules itemBusinessRules;
 
     public void createItem(CreateItemRequest createItemRequest, List<File> files, AccessCode accessCode) {
         Item item = modelMapperManager.forRequest().map(createItemRequest, Item.class);

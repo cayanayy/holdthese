@@ -4,10 +4,11 @@ import com.cayanay.holdthese.business.abstracts.FileService;
 import com.cayanay.holdthese.dataaccess.FileRepository;
 import com.cayanay.holdthese.entities.File;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class FileManager implements FileService {
     private final FileRepository fileRepository;
 

@@ -6,7 +6,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FileResponse {
-    private String fileAccessCode;
+    private String fileCode;
     private String type;
     private String name;
 }

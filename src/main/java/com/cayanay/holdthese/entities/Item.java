@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Data
-@Table(name = "Items")
+@Table(name = "items")
 @EntityListeners(AuditingEntityListener.class)
 public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

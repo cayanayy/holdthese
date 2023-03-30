@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "AccessCodes")
+@Table(name = "access_codes")
 @EntityListeners(AuditingEntityListener.class)
 public class AccessCode {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
