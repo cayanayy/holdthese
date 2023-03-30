@@ -66,4 +66,10 @@ public class AccessCodeController {
 
         itemManager.createItem(createItemRequest, files, accessCode);
     }
+
+    @DeleteMapping("{code}/{itemId}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public void deleteItem(@Valid @PathVariable("itemId") Long itemId, @PathVariable("code") String code) {
+        itemManager.deleteItem(itemId, code);
+    }
 }

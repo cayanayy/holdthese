@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ItemResponse {
+    private Long id;
     private String message;
     private LocalDateTime unableAt;
 

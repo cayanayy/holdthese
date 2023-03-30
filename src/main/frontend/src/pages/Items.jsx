@@ -12,7 +12,6 @@ const ItemsPage = () => {
         messageRef = useRef(null),
         durationRef = useRef(null),
         [numberOfSelectedFile, setNumberOfSelectedFile] = useState(0);
-    let expiresAt = "";
     //
 
     const handleFileChange = (e) => {
@@ -58,7 +57,6 @@ const ItemsPage = () => {
             .then((res) => {
                 if (res.status === 200) {
                     setItems(res.data.items.reverse());
-                    expiresAt = res.data.expiresAt;
                 }
             })
             .catch((error) => {
