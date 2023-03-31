@@ -3,7 +3,6 @@ package com.cayanay.holdthese.controllers;
 import com.cayanay.holdthese.business.concretes.AccessCodeManager;
 import com.cayanay.holdthese.business.concretes.FileManager;
 import com.cayanay.holdthese.business.concretes.ItemManager;
-import com.cayanay.holdthese.business.concretes.StorageManager;
 import com.cayanay.holdthese.business.requests.CreateAccessCodeRequest;
 import com.cayanay.holdthese.business.requests.CreateItemRequest;
 import com.cayanay.holdthese.business.responses.AccessCodeResponse;
@@ -13,7 +12,7 @@ import com.cayanay.holdthese.core.utilities.mappers.ModelMapperManager;
 import com.cayanay.holdthese.entities.AccessCode;
 import com.cayanay.holdthese.entities.File;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,12 +23,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1")
-@AllArgsConstructor
+@RequiredArgsConstructor
 @CrossOrigin("*")
 public class AccessCodeController {
     private final AccessCodeManager accessCodeManager;
     private final ItemManager itemManager;
-    private final StorageManager storageManager;
     private final FileManager fileManager;
     private final ModelMapperManager modelMapperManager;
 
@@ -58,7 +56,7 @@ public class AccessCodeController {
             for (MultipartFile multipartFile : createItemRequest.getFiles()) {
                 String fileCode = Utils.md5Hash(multipartFile.getOriginalFilename() + multipartFile.getContentType() + System.currentTimeMillis());
                 File file = File.builder().name(multipartFile.getOriginalFilename()).type(multipartFile.getContentType()).fileAccessCode(fileCode).build();
-                storageManager.uploadFile(multipartFile, fileCode);
+                fileManager.uploadFile(multipartFile, fileCode);
                 fileManager.createFile(file);
                 files.add(file);
             }

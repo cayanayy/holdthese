@@ -4,15 +4,15 @@ import com.cayanay.holdthese.core.utilities.exceptions.BusinessException;
 import com.cayanay.holdthese.core.utilities.exceptions.NotFoundException;
 import com.cayanay.holdthese.dataaccess.AccessCodeRepository;
 import com.cayanay.holdthese.entities.AccessCode;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class AccessCodeBusinessRules {
-    private AccessCodeRepository accessCodeRepository;
+    private final AccessCodeRepository accessCodeRepository;
 
     public void checkIfAccessCodeExists(String code) {
         if (accessCodeRepository.existsByCode(code)) {

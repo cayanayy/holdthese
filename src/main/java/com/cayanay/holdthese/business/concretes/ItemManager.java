@@ -24,6 +24,7 @@ public class ItemManager implements ItemService {
     private final AccessCodeBusinessRules accessCodeBusinessRules;
     private final ItemBusinessRules itemBusinessRules;
 
+    @Override
     public void createItem(CreateItemRequest createItemRequest, List<File> files, AccessCode accessCode) {
         Item item = modelMapperManager.forRequest().map(createItemRequest, Item.class);
         item.setFiles(files);
@@ -32,6 +33,7 @@ public class ItemManager implements ItemService {
         itemRepository.save(item);
     }
 
+    @Override
     public List<Item> getItemsByCode(String code) {
         AccessCode accessCode = accessCodeManager.getAccessCodeByCode(code);
         List<Item> items = itemRepository.findItemsByAccessCode(accessCode);
@@ -40,6 +42,7 @@ public class ItemManager implements ItemService {
         return items;
     }
 
+    @Override
     public void deleteItem(Long itemId, String code) {
         accessCodeBusinessRules.checkIfAccessCodeDoesNotExists(code);
         itemBusinessRules.checkIfItemDoesNotExits(itemId);

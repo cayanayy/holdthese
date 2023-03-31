@@ -11,4 +11,6 @@ public interface ItemService {
     void createItem(CreateItemRequest createItemRequest, List<File> files, AccessCode accessCode);
 
     List<Item> getItemsByCode(String code);
+
+    void deleteItem(Long itemId, String code);
 }
