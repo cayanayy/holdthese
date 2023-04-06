@@ -35,8 +35,8 @@ public class FileManager implements FileService {
 
     @Override
     public void uploadFile(MultipartFile file, String accessCode) throws IOException {
-        System.out.println(FOLDER_DIRECTORY);
-        file.transferTo(new java.io.File(FOLDER_DIRECTORY + accessCode));
+        String path = FOLDER_DIRECTORY.concat("/").concat(accessCode);
+        file.transferTo(new java.io.File(path));
     }
 
     @Override
