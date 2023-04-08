@@ -2,9 +2,9 @@ package com.cayanay.holdthese.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
-@Component
+@Configuration
 public class ApplicationConfigurator {
     @Bean
     public ModelMapper getModelMapper() {

@@ -4,8 +4,8 @@ import com.cayanay.holdthese.core.utilities.exceptions.BusinessException;
 import com.cayanay.holdthese.core.utilities.exceptions.NotFoundException;
 import com.cayanay.holdthese.core.utilities.exceptions.ProblemDetails;
 import com.cayanay.holdthese.core.utilities.exceptions.ValidationProblemDetails;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashMap;
 
 @RestControllerAdvice
-@Component
+@Configuration
 public class ExceptionConfigurator {
     @ExceptionHandler
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)

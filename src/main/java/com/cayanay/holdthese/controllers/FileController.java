@@ -10,7 +10,6 @@ import java.io.IOException;
 @RestController
 @RequestMapping("api/v1/file")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class FileController {
     private final FileManager fileManager;
 
