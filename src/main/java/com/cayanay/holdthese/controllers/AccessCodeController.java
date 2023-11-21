@@ -24,7 +24,6 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "api/v1")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class AccessCodeController {
     private final AccessCodeManager accessCodeManager;
     private final ItemManager itemManager;
@@ -65,9 +64,9 @@ public class AccessCodeController {
         itemManager.createItem(createItemRequest, files, accessCode);
     }
 
-    @DeleteMapping("{code}/{itemId}")
+    @DeleteMapping("{code}")
     @ResponseStatus(code = HttpStatus.OK)
-    public void deleteItem(@Valid @PathVariable("itemId") Long itemId, @PathVariable("code") String code) {
+    public void deleteItem(@Valid @RequestParam("itemId") Long itemId, @PathVariable("code") String code) {
         itemManager.deleteItem(itemId, code);
     }
 }
